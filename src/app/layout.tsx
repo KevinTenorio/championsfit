@@ -6,7 +6,7 @@ import { RosterProvider } from "@/context/RosterContext";
 export const metadata: Metadata = {
   title: "ChampionsFit — VGC Team Finder for Pokémon Champions",
   description:
-    "Find tournament teams from the VGC community that match your Pokémon Champions roster. Filter by coverage, Featured teams, required Pokémon, and more.",
+    "Find tournament teams from the VGC community that match your Pokémon Champions roster. Filter by coverage, Featured teams, required Pokémon, and get recruitment recommendations.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
