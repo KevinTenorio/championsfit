@@ -28,8 +28,6 @@
 - **Internacionalização (i18n)** — suporte a múltiplos idiomas na UI (português como primeira adição após inglês); manter inglês como idioma padrão
 - **Assistente de pick no Roster Ranch** — usuário informa as 10 opções do seu recruit atual (digitando ou por foto) e o app sugere o melhor pick dado o roster e os times disponíveis
 - **Sprite shiny** — quando um Pokémon está marcado como shiny (no Roster e nos membros de times que o usuário possui shiny), exibir a versão shiny da imagem em vez do sprite normal. Inicialmente shiny é indicado apenas por uma representação visual diferente (ícone/badge); a troca do sprite fica para depois.
-- **Revisar prioridade de ordenação Oficial vs Featured** — hoje a ordenação dos Times trata Torneio Oficial > Featured > comum como desempate. Há dúvida se Oficial realmente deveria pesar mais que Featured (talvez não faça sentido do jeito atual). Reavaliar o critério; note que um time pode ser Oficial e Featured ao mesmo tempo. (A feature de Recruitment Priority deliberadamente NÃO dá peso extra a Oficial — só a Featured.)
-
 ## Monetização (futuro)
 
 - **Freemium** — features básicas grátis; features avançadas do roadmap (geração de times, sugestão de recrutamento, sync) como paywall natural

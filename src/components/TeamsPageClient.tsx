@@ -24,7 +24,7 @@ export function TeamsPageClient() {
   const [tournament, setTournament] = useState("");
   const [onlyEVs, setOnlyEVs] = useState(false);
   const [onlyRental, setOnlyRental] = useState(false);
-  const [onlyHighlighted, setOnlyHighlighted] = useState(false);
+  const [onlyFeatured, setOnlyFeatured] = useState(false);
   const [page, setPage] = useState(1);
   const PAGE_SIZE = 12;
 
@@ -64,7 +64,7 @@ export function TeamsPageClient() {
   );
 
   // Reset to page 1 whenever any filter changes
-  useEffect(() => { setPage(1); }, [regulation, tournament, onlyEVs, onlyRental, onlyHighlighted, required, banned, threshold]);
+  useEffect(() => { setPage(1); }, [regulation, tournament, onlyEVs, onlyRental, onlyFeatured, required, banned, threshold]);
 
   const filtered = useMemo(() => {
     return allTeams
@@ -72,7 +72,7 @@ export function TeamsPageClient() {
       .filter((t) => !tournament || t.tournamentName === tournament)
       .filter((t) => !onlyEVs || t.hasEVs)
       .filter((t) => !onlyRental || !!t.rentalCode)
-      .filter((t) => !onlyHighlighted || isOfficialTournament(t.tournamentName) || !!t.featured)
+      .filter((t) => !onlyFeatured || !!t.featured)
       .filter((t) =>
         required.every((r) => t.members.some((m) => canonicalName(m.name).toLowerCase() === r.toLowerCase()))
       )
@@ -91,12 +91,18 @@ export function TeamsPageClient() {
         // Within equal coverage, more owned-shiny members ranks higher...
         const shinyDiff = b.shinyCount - a.shinyCount;
         if (shinyDiff !== 0) return shinyDiff;
-        // ...then prestige (official tournament, then featured).
-        const priority = (t: typeof a) =>
-          isOfficialTournament(t.tournamentName) ? 0 : t.featured ? 1 : 2;
+        // ...then prestige. Featured (deliberate curation) outranks Official
+        // (event pedigree); a team carrying both badges tops the tie-break.
+        const priority = (t: typeof a) => {
+          const official = isOfficialTournament(t.tournamentName);
+          if (t.featured && official) return 0;
+          if (t.featured) return 1;
+          if (official) return 2;
+          return 3;
+        };
         return priority(a) - priority(b);
       });
-  }, [allTeams, regulation, tournament, onlyEVs, onlyRental, onlyHighlighted, required, banned, roster, shiny, threshold]);
+  }, [allTeams, regulation, tournament, onlyEVs, onlyRental, onlyFeatured, required, banned, roster, shiny, threshold]);
 
   return (
     <div className="space-y-6">
@@ -150,11 +156,11 @@ export function TeamsPageClient() {
           <label className="flex cursor-pointer items-center gap-2 text-sm text-gray-300">
             <input
               type="checkbox"
-              checked={onlyHighlighted}
-              onChange={(e) => setOnlyHighlighted(e.target.checked)}
-              className="rounded accent-yellow-500"
+              checked={onlyFeatured}
+              onChange={(e) => setOnlyFeatured(e.target.checked)}
+              className="rounded accent-blue-500"
             />
-            Highlights only
+            Featured only
           </label>
           <label className="flex cursor-pointer items-center gap-2 text-sm text-gray-300">
             <input
