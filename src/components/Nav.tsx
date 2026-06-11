@@ -14,7 +14,7 @@ export function Nav() {
   return (
     <header className="border-b border-gray-800 bg-gray-900">
       <div className="mx-auto flex max-w-6xl items-center gap-6 px-4 py-3">
-        <span className="font-bold text-yellow-400">Champions Builder</span>
+        <span className="font-bold text-yellow-400">ChampionsFit</span>
         <nav className="flex gap-4">
           {links.map((l) => (
             <Link

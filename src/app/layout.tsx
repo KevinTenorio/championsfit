@@ -4,8 +4,9 @@ import { Nav } from "@/components/Nav";
 import { RosterProvider } from "@/context/RosterContext";
 
 export const metadata: Metadata = {
-  title: "Champions Team Builder",
-  description: "Competitive team recommendations based on your roster",
+  title: "ChampionsFit — VGC Team Finder for Pokémon Champions",
+  description:
+    "Find tournament teams from the VGC community that match your Pokémon Champions roster. Filter by coverage, Featured teams, required Pokémon, and more.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
