@@ -218,7 +218,6 @@ export const CHAMPIONS_MA: string[] = [
   "Skeledirge",
   "Quaquaval",
   "Maushold",
-  "Maushold-Four",
   "Garganacl",
   "Armarouge",
   "Ceruledge",
@@ -232,7 +231,6 @@ export const CHAMPIONS_MA: string[] = [
   "Farigiraf",
   "Kingambit",
   "Sinistcha",
-  "Sinistcha-Masterpiece",
   "Archaludon",
   "Hydrapple",
 ];
