@@ -21,20 +21,20 @@ export function TeamCard({ team }: Props) {
   return (
     <Link
       href={`/time/${team.id}`}
-      className={`block rounded-lg border p-4 hover:border-gray-600 transition-colors ${official ? "border-yellow-700/60 bg-yellow-950/20" : featured ? "border-blue-700/60 bg-blue-950/20" : "border-gray-800 bg-gray-900"}`}
+      className={`block rounded-lg border p-4 hover:border-gray-600 transition-colors ${featured ? "border-blue-700/60 bg-blue-950/20" : official ? "border-yellow-700/60 bg-yellow-950/20" : "border-gray-800 bg-gray-900"}`}
     >
       <div className="mb-3 flex items-start justify-between gap-2">
         <div>
           <div className="flex items-center gap-1.5">
             <p className="text-xs text-gray-500 truncate">{team.tournamentName}</p>
+            {featured && (
+              <span className="shrink-0 rounded bg-blue-800/60 px-1.5 py-0.5 text-[10px] font-semibold text-blue-300">
+                Featured
+              </span>
+            )}
             {official && (
               <span className="shrink-0 rounded bg-yellow-800/60 px-1.5 py-0.5 text-[10px] font-semibold text-yellow-300">
                 Official
-              </span>
-            )}
-            {featured && !official && (
-              <span className="shrink-0 rounded bg-blue-800/60 px-1.5 py-0.5 text-[10px] font-semibold text-blue-300">
-                Featured
               </span>
             )}
           </div>
