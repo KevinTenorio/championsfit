@@ -47,5 +47,11 @@ Conjunto de atributos de batalha de um membro de um Time: ability, nature, EVs e
 ### Forma de gênero
 Variante de um Pokémon diferenciada por gênero, com sprites distintos (ex: Meowstic-Male, Meowstic-Female, Basculegion-Male, Basculegion-Female). Tratada como entradas separadas no Roster. VGCPastes usa convenção diferente (ex: "Basculegion" para macho, "Basculegion-F" para fêmea), normalizada para o nome canônico.
 
+### Recruitment Priority
+Ordenação dos Pokémon que o usuário ainda **não** possui segundo o quanto recrutar cada um o aproximaria de montar Times que ele valoriza. Completar um Time (deixá-lo 6/6, jogável) tem prioridade absoluta sobre apenas aproximá-lo de completo. Entre Times, os marcados como Time Featured e aqueles em que o usuário já possui membros Shiny pesam mais; Torneios Oficiais não recebem peso extra por si só nesta feature. Exibida na aba "Recruitment" ao lado da Popularity, e o usuário escolhe por qual ordenar. Com o Roster vazio, a Recruitment Priority recai sobre a Popularity. Distinta de Roster Ranch, que é apenas a mecânica de recrutamento do jogo, não esta recomendação.
+
+### Popularity
+Contagem crua de em quantos Times de um Regulation cada Pokémon aparece, sem qualquer ponderação por Cobertura, prestígio ou Shiny. É o sinal neutro do metagame, exibido na aba "Recruitment" como contraponto à Recruitment Priority.
+
 ### Shiny
 Marca aplicada a uma entrada do Roster indicando que o usuário possui a variante shiny daquele Pokémon. Ser shiny implica possuir o Pokémon — não existe shiny de algo fora do Roster, e desmarcar a posse remove a marca de shiny. A marca é por nome canônico; formas regionais e de gênero (entradas separadas) têm shiny independente, e o shiny da base de uma Mega Evolution vale para a Mega, pois compartilham slot. Shiny não altera a Cobertura — um membro shiny já é um membro possuído —, servindo apenas como critério de desempate na ordenação de Times: entre Times de mesma Cobertura, o que possui mais membros shiny aparece primeiro, antes do desempate por Torneio Oficial e Time Featured.
