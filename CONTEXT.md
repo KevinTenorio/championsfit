@@ -29,6 +29,9 @@ Nome de um Pokémon conforme definido no Roster do sistema (arquivo `champions-m
 ### Forma regional
 Variante de um Pokémon associada a uma região específica do jogo (ex: Raichu-Alola, Ninetales-Galar). Tratada como um Pokémon distinto no Roster — possuir a forma base não implica possuir a forma regional.
 
+### Forma estética
+Variante de um Pokémon sem diferença mecânica — mesmos stats, tipos, moves e habilidades; apenas aparência distinta. Exemplos: Maushold-Four e Sinistcha-Masterpiece. Tratada como o mesmo Pokémon no Roster: existe uma única entrada (o nome base), e qualquer time com a forma estética equivale a um time com o Pokémon base. Variantes nunca coexistem no mesmo time.
+
 ### Mega Evolution
 Transformação temporária durante a batalha ativada por um Mega Stone. Um Pokémon e sua Mega Evolution compartilham o mesmo slot no Roster — possuir o Pokémon base implica possuir a Mega Evolution. Mega Evolutions não aparecem como entradas separadas no Roster.
 

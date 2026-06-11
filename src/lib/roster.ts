@@ -14,6 +14,9 @@ const VGCPASTES_TO_ROSTER: Record<string, string> = {
   Meowstic: "Meowstic-Male",
   "Basculegion-F": "Basculegion-Female",
   "Meowstic-F": "Meowstic-Female",
+  // Aesthetic forms — mechanically identical to the base form
+  "Maushold-Four": "Maushold",
+  "Sinistcha-Masterpiece": "Sinistcha",
 };
 
 export function canonicalName(name: string): string {
