@@ -27,6 +27,7 @@
 - **Sugestão de recrutamento (Roster Ranch)** — "recrute X para desbloquear N times adicionais"
 - **Internacionalização (i18n)** — suporte a múltiplos idiomas na UI (português como primeira adição após inglês); manter inglês como idioma padrão
 - **Assistente de pick no Roster Ranch** — usuário informa as 10 opções do seu recruit atual (digitando ou por foto) e o app sugere o melhor pick dado o roster e os times disponíveis
+- **Sprite shiny** — quando um Pokémon está marcado como shiny (no Roster e nos membros de times que o usuário possui shiny), exibir a versão shiny da imagem em vez do sprite normal. Inicialmente shiny é indicado apenas por uma representação visual diferente (ícone/badge); a troca do sprite fica para depois.
 
 ## Monetização (futuro)
 

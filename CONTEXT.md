@@ -46,3 +46,6 @@ Conjunto de atributos de batalha de um membro de um Time: ability, nature, EVs e
 
 ### Forma de gênero
 Variante de um Pokémon diferenciada por gênero, com sprites distintos (ex: Meowstic-Male, Meowstic-Female, Basculegion-Male, Basculegion-Female). Tratada como entradas separadas no Roster. VGCPastes usa convenção diferente (ex: "Basculegion" para macho, "Basculegion-F" para fêmea), normalizada para o nome canônico.
+
+### Shiny
+Marca aplicada a uma entrada do Roster indicando que o usuário possui a variante shiny daquele Pokémon. Ser shiny implica possuir o Pokémon — não existe shiny de algo fora do Roster, e desmarcar a posse remove a marca de shiny. A marca é por nome canônico; formas regionais e de gênero (entradas separadas) têm shiny independente, e o shiny da base de uma Mega Evolution vale para a Mega, pois compartilham slot. Shiny não altera a Cobertura — um membro shiny já é um membro possuído —, servindo apenas como critério de desempate na ordenação de Times: entre Times de mesma Cobertura, o que possui mais membros shiny aparece primeiro, antes do desempate por Torneio Oficial e Time Featured.

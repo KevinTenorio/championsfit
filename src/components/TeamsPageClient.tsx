@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { Team } from "@/types";
 import { getVGCPastesTeams } from "@/lib/vgcpastes";
 import { useRoster } from "@/context/RosterContext";
-import { computeCoverage, canonicalName } from "@/lib/roster";
+import { computeCoverage, countShinyMembers, canonicalName } from "@/lib/roster";
 import { CHAMPIONS_MA } from "@/data/champions-ma";
 import { isOfficialTournament } from "@/data/official-tournaments";
 import { TeamCard } from "./TeamCard";
@@ -12,7 +12,7 @@ import { PokemonFilter } from "./PokemonFilter";
 import { PokemonSprite } from "./PokemonSprite";
 
 export function TeamsPageClient() {
-  const { roster } = useRoster();
+  const { roster, shiny } = useRoster();
   const [regulations, setRegulations] = useState<string[]>([]);
   const [regulation, setRegulation] = useState("");
   const [allTeams, setAllTeams] = useState<Team[]>([]);
@@ -82,16 +82,21 @@ export function TeamsPageClient() {
       .map((t) => ({
         ...t,
         rosterCoverage: computeCoverage(roster, t.members.map((m) => m.name)),
+        shinyCount: countShinyMembers(shiny, t.members.map((m) => m.name)),
       }))
       .filter((t) => roster.size === 0 || threshold === 0 || t.rosterCoverage >= threshold / 6)
       .sort((a, b) => {
         const covDiff = b.rosterCoverage - a.rosterCoverage;
         if (covDiff !== 0) return covDiff;
+        // Within equal coverage, more owned-shiny members ranks higher...
+        const shinyDiff = b.shinyCount - a.shinyCount;
+        if (shinyDiff !== 0) return shinyDiff;
+        // ...then prestige (official tournament, then featured).
         const priority = (t: typeof a) =>
           isOfficialTournament(t.tournamentName) ? 0 : t.featured ? 1 : 2;
         return priority(a) - priority(b);
       });
-  }, [allTeams, regulation, tournament, onlyEVs, onlyRental, onlyHighlighted, required, banned, roster, threshold]);
+  }, [allTeams, regulation, tournament, onlyEVs, onlyRental, onlyHighlighted, required, banned, roster, shiny, threshold]);
 
   return (
     <div className="space-y-6">
