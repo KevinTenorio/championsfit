@@ -11,7 +11,7 @@ interface Props {
 }
 
 export function TeamCard({ team }: Props) {
-  const { has, roster } = useRoster();
+  const { has, isShiny, roster } = useRoster();
   const covered = team.members.filter((m) => has(m.name)).length;
   const pct = roster.size > 0 ? Math.round((covered / 6) * 100) : null;
   const official = isOfficialTournament(team.tournamentName);
@@ -56,17 +56,30 @@ export function TeamCard({ team }: Props) {
       </div>
 
       <div className="grid grid-cols-6 gap-1">
-        {team.members.map((m) => (
-          <div
-            key={m.name}
-            title={m.name}
-            className={`rounded p-0.5 ${
-              has(m.name) ? "bg-blue-900/60 ring-1 ring-blue-700" : "bg-gray-800/60"
-            }`}
-          >
-            <PokemonSprite name={m.name} className="w-full aspect-square" />
-          </div>
-        ))}
+        {team.members.map((m) => {
+          const shiny = isShiny(m.name);
+          const owned = has(m.name);
+          return (
+            <div
+              key={m.name}
+              title={shiny ? `${m.name} (shiny)` : m.name}
+              className={`relative rounded p-0.5 ${
+                shiny
+                  ? "bg-yellow-900/50 ring-1 ring-yellow-500"
+                  : owned
+                  ? "bg-blue-900/60 ring-1 ring-blue-700"
+                  : "bg-gray-800/60"
+              }`}
+            >
+              <PokemonSprite name={m.name} className="w-full aspect-square" />
+              {shiny && (
+                <span className="absolute -right-0.5 -top-1 text-[11px] leading-none text-yellow-300 drop-shadow">
+                  ★
+                </span>
+              )}
+            </div>
+          );
+        })}
       </div>
     </Link>
   );

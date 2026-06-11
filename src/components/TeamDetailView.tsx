@@ -9,7 +9,7 @@ interface Props {
 }
 
 export function TeamDetailView({ team }: Props) {
-  const { has } = useRoster();
+  const { has, isShiny } = useRoster();
 
   return (
     <div className="space-y-6">
@@ -24,20 +24,27 @@ export function TeamDetailView({ team }: Props) {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {team.members.map((m) => (
+        {team.members.map((m) => {
+          const owned = has(m.name);
+          const shiny = isShiny(m.name);
+          return (
           <div
             key={m.name}
             className={`rounded-lg border p-4 ${
-              has(m.name)
+              shiny
+                ? "border-yellow-600 bg-yellow-950/40"
+                : owned
                 ? "border-blue-700 bg-blue-950"
                 : "border-gray-800 bg-gray-900"
             }`}
           >
             <div className="mb-2 flex items-center justify-between">
               <h2 className="font-semibold">{m.name}</h2>
-              {has(m.name) && (
+              {shiny ? (
+                <span className="text-xs text-yellow-300">★ shiny</span>
+              ) : owned ? (
                 <span className="text-xs text-blue-400">no roster</span>
-              )}
+              ) : null}
             </div>
             <dl className="space-y-1 text-sm">
               <div className="flex gap-2">
@@ -64,7 +71,8 @@ export function TeamDetailView({ team }: Props) {
               </div>
             </dl>
           </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
