@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { Team } from "@/types";
 import { useRoster } from "@/context/RosterContext";
+import { ShinyIcon } from "./ShinyIcon";
 
 interface Props {
   team: Team;
@@ -41,7 +42,9 @@ export function TeamDetailView({ team }: Props) {
             <div className="mb-2 flex items-center justify-between">
               <h2 className="font-semibold">{m.name}</h2>
               {shiny ? (
-                <span className="text-xs text-yellow-300">★ shiny</span>
+                <span className="flex items-center gap-1 text-xs text-yellow-300">
+                  <ShinyIcon size={12} /> shiny
+                </span>
               ) : owned ? (
                 <span className="text-xs text-blue-400">no roster</span>
               ) : null}

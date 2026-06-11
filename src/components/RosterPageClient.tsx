@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { CHAMPIONS_MA } from "@/data/champions-ma";
 import { useRoster } from "@/context/RosterContext";
 import { PokemonSprite } from "./PokemonSprite";
+import { ShinyIcon } from "./ShinyIcon";
 
 export function RosterPageClient() {
   const { roster, toggle, has, isShiny, toggleShiny } = useRoster();
@@ -39,7 +40,7 @@ export function RosterPageClient() {
             <button
               key={opt}
               onClick={() => setSortBy(opt)}
-              className={`px-3 py-2 transition-colors ${
+              className={`cursor-pointer px-3 py-2 transition-colors ${
                 sortBy === opt
                   ? "bg-blue-700 text-white"
                   : "bg-gray-800 text-gray-400 hover:text-gray-200"
@@ -59,7 +60,7 @@ export function RosterPageClient() {
             <div key={name} className="relative">
               <button
                 onClick={() => toggle(name)}
-                className={`flex w-full items-center gap-2 rounded-lg border px-3 py-2 pr-8 text-left text-sm transition-colors ${
+                className={`flex w-full cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 pr-8 text-left text-sm transition-colors ${
                   shiny
                     ? "border-yellow-500 bg-yellow-900/40 text-yellow-100"
                     : owned
@@ -91,15 +92,17 @@ export function RosterPageClient() {
               {owned && (
                 <button
                   onClick={() => toggleShiny(name)}
-                  title={shiny ? "Remove shiny" : "Mark as shiny"}
                   aria-label={shiny ? "Remove shiny" : "Mark as shiny"}
-                  className={`absolute right-1.5 top-1/2 -translate-y-1/2 rounded px-1 text-base leading-none transition-colors ${
+                  className={`group absolute right-1.5 top-1/2 flex -translate-y-1/2 cursor-pointer items-center justify-center rounded p-1 transition-colors ${
                     shiny
                       ? "text-yellow-300 hover:text-yellow-200"
                       : "text-gray-600 hover:text-yellow-300"
                   }`}
                 >
-                  ★
+                  <ShinyIcon size={16} />
+                  <span className="pointer-events-none absolute bottom-full right-0 z-10 mb-1 whitespace-nowrap rounded bg-gray-950 px-2 py-1 text-xs text-gray-100 opacity-0 shadow-lg ring-1 ring-gray-700 transition-opacity group-hover:opacity-100">
+                    {shiny ? "Remove shiny" : "Mark as shiny"}
+                  </span>
                 </button>
               )}
             </div>

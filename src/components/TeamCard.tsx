@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Team } from "@/types";
 import { useRoster } from "@/context/RosterContext";
 import { PokemonSprite } from "./PokemonSprite";
+import { ShinyIcon } from "./ShinyIcon";
 import { isOfficialTournament } from "@/data/official-tournaments";
 
 interface Props {
@@ -73,9 +74,10 @@ export function TeamCard({ team }: Props) {
             >
               <PokemonSprite name={m.name} className="w-full aspect-square" />
               {shiny && (
-                <span className="absolute -right-0.5 -top-1 text-[11px] leading-none text-yellow-300 drop-shadow">
-                  ★
-                </span>
+                <ShinyIcon
+                  size={12}
+                  className="absolute -right-1 -top-1 text-yellow-300 drop-shadow"
+                />
               )}
             </div>
           );
