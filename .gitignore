@@ -8,4 +8,6 @@ tsconfig.tsbuildinfo
 npm-debug.log*
 .DS_Store
 Thumbs.db
-.claude/settings.local.json
+.claude/
+skills/
+BACKLOG.md
