@@ -20,15 +20,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="mx-auto max-w-6xl px-4 py-6 text-center text-xs text-gray-600">
               <p>
                 Team data sourced from{" "}
-                <a
-                  href="https://docs.google.com/spreadsheets/d/1axlwmzPA49rYkqXh7zHvAtSP-TKbM0ijGYBPRflLSWw"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-500 hover:text-gray-300 underline underline-offset-2"
-                >
-                  VGCPastes
-                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1axlwmzPA49rYkqXh7zHvAtSP-TKbM0ijGYBPRflLSWw" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-gray-300 underline underline-offset-2">VGCPastes</a>
                 , maintained by the VGC community.
+                {" "}Sprites from{" "}
+                <a href="https://pokemonshowdown.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-gray-300 underline underline-offset-2">Pokémon Showdown</a>
+                {" "}and{" "}
+                <a href="https://pokeapi.co" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-gray-300 underline underline-offset-2">PokéAPI</a>
+                .
               </p>
               <p className="mt-1">
                 Feedback? Find me on Discord:{" "}
