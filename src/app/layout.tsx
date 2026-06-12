@@ -30,6 +30,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </a>
                 , maintained by the VGC community.
               </p>
+              <p className="mt-1">
+                Feedback? Find me on Discord:{" "}
+                <span className="text-gray-500 select-all">kevint2911</span>
+                {" "}·{" "}
+                <a
+                  href="https://github.com/KevinTenorio/championsfit/issues"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-500 hover:text-gray-300 underline underline-offset-2"
+                >
+                  GitHub Issues
+                </a>
+              </p>
               <p className="mt-1">Pokémon and all related names, characters, and imagery are © Nintendo / Creatures Inc. / GAME FREAK inc. This is a fan-made tool, not affiliated with or endorsed by Nintendo or The Pokémon Company.</p>
             </div>
           </footer>
