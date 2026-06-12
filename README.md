@@ -12,7 +12,7 @@ ChampionsFit helps Pokémon Champions players discover real tournament teams the
 
 - **Roster matching** — mark your owned Pokémon and see coverage for every team
 - **Recruitment recommendations** — find out which Pokémon to target next, ranked by how many teams they'd unlock
-- **Featured & Official filters** — surface curated picks and high-prestige tournament results first
+- **Featured & Official filters** — surface teams curated by the community and high-prestige tournament results first
 - **Shiny tracking** — mark shiny Pokémon in your roster; teams with your shinies rank higher
 - **Required / Banned Pokémon filters** — find teams built around specific Pokémon
 - **Rental codes** — filter for teams with a rental code ready to use
@@ -37,7 +37,8 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Credits
 
 - **[VGCPastes](https://docs.google.com/spreadsheets/d/1axlwmzPA49rYkqXh7zHvAtSP-TKbM0ijGYBPRflLSWw)** — tournament team data, maintained by the VGC community
-- **[PokéAPI](https://pokeapi.co)** — Pokémon sprites
+- **[Pokémon Showdown](https://pokemonshowdown.com)** — Pokémon sprites
+- **[PokéAPI](https://pokeapi.co)** — supplementary sprites and data
 
 ## Disclaimer
 
