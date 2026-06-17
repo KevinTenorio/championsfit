@@ -1,0 +1,32 @@
+# Libraries
+
+- `src\data\official-tournaments.ts` — function isOfficialTournament: (name) => boolean, const OFFICIAL_TOURNAMENTS: ReadonlySet<string>
+- `src\lib\limitless.ts`
+  - function getRegulations: () => Promise<string[]>
+  - function getTournaments: (regulation) => Promise<LimitlessTournament[]>
+  - function getTeams: (regulation) => Promise<Team[]>
+- `src\lib\pokepaste.ts`
+  - function parseShowdownPaste: (paste) => PokepasteMember[]
+  - function fetchPaste: (pasteUrl) => Promise<PokepasteMember[] | null>
+  - const NATURE_STATS: Record<string, { plus: string; minus: string }>
+- `src\lib\recruitment.ts`
+  - function computeRecruitment: (allPokemon, teams, roster, shiny) => RecruitmentEntry[]
+  - function comparePriority: (a, b) => number
+  - function comparePopularity: (a, b) => number
+  - interface RecruitmentEntry
+  - const FEATURED_WEIGHT
+  - const SHINY_WEIGHT_PER_MEMBER
+- `src\lib\roster.ts`
+  - function baseName: (name) => string
+  - function canonicalName: (name) => string
+  - function getRoster: () => Set<string>
+  - function saveRoster: (roster) => void
+  - function togglePokemon: (roster, name) => Set<string>
+  - function computeCoverage: (roster, teamNames) => number
+  - _...3 more_
+- `src\lib\sprites.ts`
+  - function pokemonSpriteUrl: (name) => string
+  - function pokemonFallbackUrl: (name) => string | null
+  - function itemSpriteUrl: (name) => string
+  - function itemSpriteSize: (name) => number
+- `src\lib\vgcpastes.ts` — function getVGCPastesTeams: () => Promise<Team[]>
