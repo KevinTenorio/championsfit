@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { CHAMPIONS_MA } from "@/data/champions-ma";
+import { CHAMPIONS_MB } from "@/data/champions-mb";
 import { useRoster } from "@/context/RosterContext";
 import { PokemonSprite } from "./PokemonSprite";
 import { ShinyIcon } from "./ShinyIcon";
@@ -12,7 +12,7 @@ export function RosterPageClient() {
   const [sortBy, setSortBy] = useState<"alpha" | "dex">("alpha");
 
   const filtered = useMemo(() => {
-    const list = CHAMPIONS_MA.filter((name) =>
+    const list = CHAMPIONS_MB.filter((name) =>
       name.toLowerCase().includes(search.toLowerCase())
     );
     if (sortBy === "alpha") return [...list].sort((a, b) => a.localeCompare(b));

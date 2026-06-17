@@ -5,7 +5,7 @@ import type { Team } from "@/types";
 import { getVGCPastesTeams } from "@/lib/vgcpastes";
 import { useRoster } from "@/context/RosterContext";
 import { computeCoverage, countShinyMembers, canonicalName } from "@/lib/roster";
-import { CHAMPIONS_MA } from "@/data/champions-ma";
+import { CHAMPIONS_MB } from "@/data/champions-mb";
 import { isOfficialTournament } from "@/data/official-tournaments";
 import { TeamCard } from "./TeamCard";
 import { PokemonFilter } from "./PokemonFilter";
@@ -41,7 +41,7 @@ export function TeamsPageClient() {
   }, []);
 
   const pokemonOptions = useMemo(
-    () => [...CHAMPIONS_MA].sort(),
+    () => [...CHAMPIONS_MB].sort(),
     []
   );
 

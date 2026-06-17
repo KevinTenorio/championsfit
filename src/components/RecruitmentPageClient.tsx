@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { Team } from "@/types";
-import { CHAMPIONS_MA } from "@/data/champions-ma";
+import { CHAMPIONS_MB } from "@/data/champions-mb";
 import { useRoster } from "@/context/RosterContext";
 import { getVGCPastesTeams } from "@/lib/vgcpastes";
 import {
@@ -34,7 +34,7 @@ export function RecruitmentPageClient() {
   const emptyRoster = roster.size === 0;
 
   const entries = useMemo(
-    () => computeRecruitment(CHAMPIONS_MA, teams, roster, shiny),
+    () => computeRecruitment(CHAMPIONS_MB, teams, roster, shiny),
     [teams, roster, shiny]
   );
 

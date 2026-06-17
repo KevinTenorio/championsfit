@@ -7,6 +7,9 @@ const SPRITE_URL_OVERRIDES: Record<string, string> = {
   "kommo-o": `${POKEAPI}/784.png`,
   "floette-eternal": `${POKEAPI}/10061.png`,
   "floette-eternal-mega": `${POKEAPI}/10061.png`,
+  "grimmsnarl": `${POKEAPI}/861.png`,
+  "falinks": `${POKEAPI}/870.png`,
+  "overqwil": `${POKEAPI}/904.png`,
 };
 
 // Showdown uses abbreviated suffixes for some gender forms
