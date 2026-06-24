@@ -34,7 +34,7 @@ export function TeamsPageClient() {
         setAllTeams(teams);
         const regs = [...new Set(teams.map((t) => t.regulation))];
         setRegulations(regs);
-        setRegulation(regs[0] ?? "M-A");
+        setRegulation(regs[0] ?? "M-B");
       })
       .catch(() => setError("Could not load teams."))
       .finally(() => setLoading(false));

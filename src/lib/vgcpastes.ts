@@ -1,28 +1,45 @@
 import type { Team } from "@/types";
 
 const SHEET_ID = "1axlwmzPA49rYkqXh7zHvAtSP-TKbM0ijGYBPRflLSWw";
-const SHEET_NAME = "Champions M-A";
-const FEATURED_SHEET_NAME = "Champions M-A Featured Teams";
-const REGULATION = "M-A";
 
 // Column indices (0-based) in the gviz response
-const COL_ID = 0;             // A — Team ID
-const COL_DESC = 1;           // B — Team description
-const COL_TRAINER = 3;        // D — Full name
-const COL_PASTE = 24;         // Y — Pokepaste URL
-const COL_RENTAL_STATUS = 27; // AB — Replica status (✔ = available)
-const COL_RENTAL_CODE = 28;   // AC — Rental/Replica code
-const COL_DATE = 29;          // AD — Date shared
-const COL_EVENT = 30;         // AE — Tournament / Event
-const COL_RANK = 31;          // AF — Rank
-const COL_SOURCE = 32;        // AG — Link to source
-const COL_VIDEO = 33;         // AH — Report / Video
-const COL_OTHER = 34;         // AI — Other links
-const COL_OWNER = 35;         // AJ — Owner
-const COL_ITEM1 = 7;          // H — Item for Pokémon 1 (pattern: 7 + i*3)
-const COL_EVS = 25;           // Z — EVs available ("Yes" / "No")
-const COL_P1 = 37;            // AL — Pokémon 1
-const COL_P6 = 42;            // AQ — Pokémon 6
+const COL_ID = 0;
+const COL_DESC = 1;
+const COL_TRAINER = 3;
+const COL_PASTE = 24;
+const COL_RENTAL_CODE = 28;
+const COL_DATE = 29;
+const COL_EVENT = 30;
+const COL_RANK = 31;
+const COL_SOURCE = 32;
+const COL_VIDEO = 33;
+const COL_OTHER = 34;
+const COL_OWNER = 35;
+const COL_ITEM1 = 7;
+const COL_EVS = 25;
+const COL_P1 = 37;
+
+interface RegulationConfig {
+  sheetName: string;
+  featuredSheetName: string | null;
+  regulation: string;
+  idPrefix: string;
+}
+
+const REGULATIONS: RegulationConfig[] = [
+  {
+    sheetName: "Champions M-B",
+    featuredSheetName: null,
+    regulation: "M-B",
+    idPrefix: "MB",
+  },
+  {
+    sheetName: "Champions M-A",
+    featuredSheetName: "Champions M-A Featured Teams",
+    regulation: "M-A",
+    idPrefix: "PC",
+  },
+];
 
 interface GvizCell {
   v: string | number | null;
@@ -35,7 +52,6 @@ interface GvizRow {
 function cell(row: GvizRow, index: number): string {
   const val = row.c[index]?.v;
   if (val == null) return "";
-  // gviz returns dates as "Date(yyyy,m,d)" — convert to readable string
   if (typeof val === "string" && val.startsWith("Date(")) {
     const parts = val.slice(5, -1).split(",").map(Number);
     const [y, m, d] = parts;
@@ -44,10 +60,10 @@ function cell(row: GvizRow, index: number): string {
   return String(val).trim();
 }
 
-async function getFeaturedIds(): Promise<Set<string>> {
+async function getFeaturedIds(featuredSheetName: string): Promise<Set<string>> {
   const url =
     `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq` +
-    `?tqx=out:json&sheet=${encodeURIComponent(FEATURED_SHEET_NAME)}&range=A:A`;
+    `?tqx=out:json&sheet=${encodeURIComponent(featuredSheetName)}&range=A:A`;
 
   try {
     const res = await fetch(url);
@@ -58,31 +74,31 @@ async function getFeaturedIds(): Promise<Set<string>> {
     return new Set(
       data.table.rows
         .map((row) => cell(row, 0))
-        .filter((id) => id.startsWith("PC"))
+        .filter(Boolean)
     );
   } catch {
     return new Set();
   }
 }
 
-export async function getVGCPastesTeams(): Promise<Team[]> {
+async function fetchRegulation(config: RegulationConfig): Promise<Team[]> {
   const url =
     `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq` +
-    `?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}&range=A4:AQ`;
+    `?tqx=out:json&sheet=${encodeURIComponent(config.sheetName)}&range=A4:AQ`;
 
-  const [res, featuredIds] = await Promise.all([fetch(url), getFeaturedIds()]);
-  if (!res.ok) throw new Error("Failed to fetch VGCPastes");
+  const [res, featuredIds] = await Promise.all([
+    fetch(url),
+    config.featuredSheetName ? getFeaturedIds(config.featuredSheetName) : Promise.resolve(new Set<string>()),
+  ]);
 
-  // Google wraps the JSON in a callback: /*O_o*/\ngoogle.visualization.Query.setResponse({...});
+  if (!res.ok) throw new Error(`Failed to fetch VGCPastes sheet: ${config.sheetName}`);
+
   const text = await res.text();
   const json = text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1);
   const data = JSON.parse(json) as { table: { rows: GvizRow[] } };
 
   return data.table.rows
-    .filter((row) => {
-      const id = cell(row, COL_ID);
-      return id.startsWith("PC");
-    })
+    .filter((row) => cell(row, COL_ID).startsWith(config.idPrefix))
     .map((row) => {
       const members = Array.from({ length: 6 }, (_, i) => ({
         name: cell(row, COL_P1 + i),
@@ -102,7 +118,7 @@ export async function getVGCPastesTeams(): Promise<Team[]> {
         id: cell(row, COL_ID),
         tournamentId: "",
         tournamentName: cell(row, COL_EVENT),
-        regulation: REGULATION,
+        regulation: config.regulation,
         playerName: cell(row, COL_TRAINER) || cell(row, COL_DESC),
         placement: 0,
         rankLabel: cell(row, COL_RANK),
@@ -119,4 +135,9 @@ export async function getVGCPastesTeams(): Promise<Team[]> {
       };
     })
     .filter((t) => t.members.length === 6);
+}
+
+export async function getVGCPastesTeams(): Promise<Team[]> {
+  const results = await Promise.all(REGULATIONS.map(fetchRegulation));
+  return results.flat();
 }
