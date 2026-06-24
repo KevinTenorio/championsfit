@@ -13,6 +13,7 @@ const SPRITE_URL_OVERRIDES: Record<string, string> = {
 };
 
 // Showdown uses abbreviated suffixes for some gender forms
+// Champions-specific Megas (non-mainline) are mapped to base form to avoid ORB-blocked 404s
 const NAME_MAP: Record<string, string> = {
   "basculegion-male": "basculegion",
   "basculegion-female": "basculegion-f",
@@ -23,6 +24,23 @@ const NAME_MAP: Record<string, string> = {
   "tauros-paldea-combat": "tauros-paldeacombat",
   "tauros-paldea-blaze": "tauros-paldeablaze",
   "tauros-paldea-aqua": "tauros-paldeaaqua",
+  // Champions-specific Megas — no Showdown sprite exists
+  "froslass-mega": "froslass",
+  "scovillain-mega": "scovillain",
+  "pyroar-mega": "pyroar",
+  "dragonite-mega": "dragonite",
+  "floette-mega": "floette",
+  "dragalge-mega": "dragalge",
+  "hawlucha-mega": "hawlucha",
+  "eelektross-mega": "eelektross",
+  "barbaracle-mega": "barbaracle",
+  "malamar-mega": "malamar",
+  "scolipede-mega": "scolipede",
+  "scrafty-mega": "scrafty",
+  "delphox-mega": "delphox",
+  "glimmora-mega": "glimmora",
+  "raichu-mega-x": "raichu",
+  "staraptor-mega": "staraptor",
 };
 
 function normalize(name: string): string {
