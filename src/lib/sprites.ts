@@ -10,6 +10,8 @@ const SPRITE_URL_OVERRIDES: Record<string, string> = {
   "grimmsnarl": `${POKEAPI}/861.png`,
   "falinks": `${POKEAPI}/870.png`,
   "overqwil": `${POKEAPI}/904.png`,
+  "basculegion": `${POKEAPI}/901.png`,
+  "basculegion-f": `${POKEAPI}/10248.png`,
 };
 
 // Showdown uses abbreviated suffixes for some gender forms
